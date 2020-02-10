@@ -15,29 +15,46 @@ public class Server extends Thread{
     public Server(Socket s){
         this.client = s;
     }
-    public Socket attendi(){
-        System.out.println("SERVER partito...\n");
+    @Override
+    public void run() {
+        try{
+            comunica();
+        }
+        catch (Exception e){
+            e.printStackTrace(System.out);
+        }
+    }
+    public void comunica(){
         try {
-            server = new ServerSocket(2000);
-            client = server.accept();
-            server.close();
             inClient = new BufferedReader(new InputStreamReader(client.getInputStream()));
             outClient = new DataOutputStream(client.getOutputStream());
+            while (true){
+                String stringaricevuta = inClient.readLine();
+                if (stringaricevuta==null || stringaricevuta.equals("FINE")){
+                    System.out.println("Stringa ricevuta :"+stringaricevuta);
+                    String stringam = stringaricevuta.toUpperCase();
+                    outClient.writeBytes("Server in Chisura -->"+stringam + '\n');
+                    System.out.println("Server In Chiusura...");
+                    break;
+                }
+                else {
+                    System.out.println("Stringa ricevuta :"+stringaricevuta);
+                    String stringam = stringaricevuta.toUpperCase();
+                    System.out.println("invio stringa modificata");
+                    outClient.writeBytes(stringam + '\n');
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return client;
-    }
-    public void comunica(){
-        String stringaricevuta = null;
-        try {
-            stringaricevuta = inClient.readLine();
-            System.out.println("Stringa ricevuta :"+stringaricevuta);
-            String stringam = stringaricevuta.toUpperCase();
-            System.out.println("invio stringa modificata");
-            outClient.writeBytes(stringam + '\n');
-        } catch (IOException e) {
-            e.printStackTrace();
+        finally {
+            try {
+                inClient.close();
+                outClient.close();
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }

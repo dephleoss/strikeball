@@ -26,17 +26,26 @@ public class Cliente {
         return s;
     }
     public void comunica(){
-
-        try {
-            System.out.print("Inserisci la stringa da inviare al server:");
-            stringaletta = tastiera.readLine();
-            System.out.print("Invio stringa al client");
-            out.writeBytes(stringaletta+'\n');
-            String stringaricevuta = in.readLine();
-            System.out.print("Stringa ricevuta: "+stringaricevuta);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        while (true)
+            try {
+                System.out.print("Inserisci la stringa da inviare al server:\n");
+                stringaletta = tastiera.readLine();
+                System.out.print("Invio stringa al client");
+                out.writeBytes(stringaletta + '\n');
+                String stringaricevuta = in.readLine();
+                System.out.print("Stringa ricevuta: " + stringaricevuta);
+                if (stringaletta.equals("FINE")) {
+                    System.out.println("CLIENT in chiusura...");
+                    break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }finally {
+                try {
+                    s.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
     }
 }
