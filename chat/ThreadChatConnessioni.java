@@ -39,4 +39,11 @@ public class ThreadChatConnessioni implements Runnable{
             output.println("Errore nella spedizione del messaggio a tutti");
         }
     }
+    public void spedisciMessaggioChat(String messaggio){
+        try {
+            output.println(messaggio);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

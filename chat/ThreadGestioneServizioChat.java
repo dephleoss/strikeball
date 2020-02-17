@@ -1,10 +1,10 @@
 package chat;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.List;
 
 public class ThreadGestioneServizioChat implements Runnable{
     private int nrMaxConnessioni;
@@ -33,7 +33,7 @@ public class ThreadGestioneServizioChat implements Runnable{
                for (int xx=0;xx<this.nrMaxConnessioni;xx++){
                    Socket tempo=null;
                    tempo = serverChat.accept();
-                   listaConnessioni[xx] = new ThreadGestioneServizioChat(this,tempo);
+                   listaConnessioni[xx] = new ThreadChatConnessioni(this,tempo);
                }
            } catch (IOException e) {
                JOptionPane.showMessageDialog(null,"Impossibile instanziare server chat");

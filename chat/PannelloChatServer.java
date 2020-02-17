@@ -2,11 +2,13 @@ package chat;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PannelloChatServer extends JFrame {
+public class PannelloChatServer extends JFrame implements ActionListener{
     private List lista;
     private JTextField textNuovo;
+    private ThreadGestioneServizioChat gestioneServizio;
     public PannelloChatServer(){
         super();
         this.setBackground(new Color(50,100,255));
@@ -41,6 +43,16 @@ public class PannelloChatServer extends JFrame {
 
 
 
+    }
+    public void connetti(){
+        gestioneServizio = new ThreadGestioneServizioChat(10,lista);
+    }
+    public void actionPerformed(ActionEvent e){
+        String bottone = e.getActionCommand();
+        if(bottone.equals("invia")){
+            gestioneServizio.spedisciMessaggio(textNuovo.getText());
+            textNuovo.setText("");
+        }
     }
 
 }
