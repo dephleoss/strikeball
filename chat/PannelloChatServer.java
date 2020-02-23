@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PannelloChatServer extends JFrame implements ActionListener{
+public class PannelloChatServer extends JPanel implements ActionListener{
     private List lista;
     private JTextField textNuovo;
     private ThreadGestioneServizioChat gestioneServizio;

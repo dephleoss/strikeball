@@ -36,7 +36,7 @@ public class ThreadChatClient implements Runnable{
                 while ((mex=input.readLine())==null){
 
                 }
-                gestoreChat.spedisciMessaggio(mex);
+                //gestoreChat.spedisciMessaggio(mex);
             } catch (IOException e) {
                 e.printStackTrace();
             }

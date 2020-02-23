@@ -23,7 +23,7 @@ public class ThreadGestioneServizioChat implements Runnable{
     public void run() {
         boolean continua = true;
         try{
-            serverChat = new ServerSocket(6789);
+            serverChat = new ServerSocket(2000);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null,"Impossibile instanziare il server");
             e.printStackTrace();
